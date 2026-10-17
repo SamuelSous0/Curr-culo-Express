@@ -1,0 +1,495 @@
+{
+  "info": {
+    "name": "Currículo Express API",
+    "description": "Coleção completa de endpoints da API REST de Currículo Express — CRUD de Perfis, Experiências Acadêmicas, Experiências Profissionais e Projetos.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://sua-url-na-vercel.vercel.app",
+      "type": "string"
+    },
+    {
+      "key": "profileId1",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "profileId2",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "academicExperienceId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "professionalExperienceId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "projectId",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Root",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/",
+              "host": ["{{baseUrl}}"],
+              "path": [""]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Profiles",
+      "item": [
+        {
+          "name": "Listar Todos os Perfis",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "if (res.length >= 2) {",
+                  "  pm.collectionVariables.set('profileId1', res[0].id);",
+                  "  pm.collectionVariables.set('profileId2', res[1].id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/profiles",
+              "host": ["{{baseUrl}}"],
+              "path": ["profiles"]
+            }
+          }
+        },
+        {
+          "name": "Buscar Perfil por ID (Pessoa 1)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/profiles/{{profileId1}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["profiles", "{{profileId1}}"]
+            }
+          }
+        },
+        {
+          "name": "Buscar Perfil por ID (Pessoa 2)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/profiles/{{profileId2}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["profiles", "{{profileId2}}"]
+            }
+          }
+        },
+        {
+          "name": "Criar Novo Perfil",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"João Silva\",\n  \"cargo\": \"Analista de Dados\",\n  \"resumo\": \"Profissional de dados com experiência em Python e SQL.\",\n  \"email\": \"joao.silva@email.com\",\n  \"telefone\": \"(11) 91234-5678\",\n  \"linkedin\": \"https://linkedin.com/in/joaosilva\",\n  \"github\": \"https://github.com/joaosilva\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/profiles",
+              "host": ["{{baseUrl}}"],
+              "path": ["profiles"]
+            }
+          }
+        },
+        {
+          "name": "Atualizar Perfil (Pessoa 1)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cargo\": \"Desenvolvedor Full Stack Sênior\",\n  \"resumo\": \"Desenvolvedor Full Stack Sênior com 3+ anos de experiência em Node.js, React e PostgreSQL.\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/profiles/{{profileId1}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["profiles", "{{profileId1}}"]
+            }
+          }
+        },
+        {
+          "name": "Deletar Perfil (por ID)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/profiles/{{profileId1}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["profiles", "{{profileId1}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Academic Experiences",
+      "item": [
+        {
+          "name": "Listar Todas as Experiências Acadêmicas",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "if (res.length >= 1) {",
+                  "  pm.collectionVariables.set('academicExperienceId', res[0].id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/academic-experiences",
+              "host": ["{{baseUrl}}"],
+              "path": ["academic-experiences"]
+            }
+          }
+        },
+        {
+          "name": "Buscar Experiência Acadêmica por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/academic-experiences/{{academicExperienceId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["academic-experiences", "{{academicExperienceId}}"]
+            }
+          }
+        },
+        {
+          "name": "Buscar Experiências Acadêmicas por Perfil",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/academic-experiences/profile/{{profileId1}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["academic-experiences", "profile", "{{profileId1}}"]
+            }
+          }
+        },
+        {
+          "name": "Criar Experiência Acadêmica",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"instituicao\": \"CESAR School\",\n  \"curso\": \"Pós-graduação em Engenharia de Software\",\n  \"inicio\": \"2026-02\",\n  \"fim\": \"2027-12\",\n  \"profile_id\": \"{{profileId1}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/academic-experiences",
+              "host": ["{{baseUrl}}"],
+              "path": ["academic-experiences"]
+            }
+          }
+        },
+        {
+          "name": "Atualizar Experiência Acadêmica",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"curso\": \"Pós-graduação em Arquitetura de Software\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/academic-experiences/{{academicExperienceId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["academic-experiences", "{{academicExperienceId}}"]
+            }
+          }
+        },
+        {
+          "name": "Deletar Experiência Acadêmica",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/academic-experiences/{{academicExperienceId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["academic-experiences", "{{academicExperienceId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Professional Experiences",
+      "item": [
+        {
+          "name": "Listar Todas as Experiências Profissionais",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "if (res.length >= 1) {",
+                  "  pm.collectionVariables.set('professionalExperienceId', res[0].id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/professional-experiences",
+              "host": ["{{baseUrl}}"],
+              "path": ["professional-experiences"]
+            }
+          }
+        },
+        {
+          "name": "Buscar Experiência Profissional por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/professional-experiences/{{professionalExperienceId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["professional-experiences", "{{professionalExperienceId}}"]
+            }
+          }
+        },
+        {
+          "name": "Buscar Experiências Profissionais por Perfil",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/professional-experiences/profile/{{profileId2}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["professional-experiences", "profile", "{{profileId2}}"]
+            }
+          }
+        },
+        {
+          "name": "Criar Experiência Profissional",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"empresa\": \"Google Brasil\",\n  \"cargo\": \"Software Engineer\",\n  \"inicio\": \"2026-01\",\n  \"fim\": null,\n  \"descricao\": \"Desenvolvimento de serviços de backend em larga escala.\",\n  \"profile_id\": \"{{profileId2}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/professional-experiences",
+              "host": ["{{baseUrl}}"],
+              "path": ["professional-experiences"]
+            }
+          }
+        },
+        {
+          "name": "Atualizar Experiência Profissional",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cargo\": \"Senior Software Engineer\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/professional-experiences/{{professionalExperienceId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["professional-experiences", "{{professionalExperienceId}}"]
+            }
+          }
+        },
+        {
+          "name": "Deletar Experiência Profissional",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/professional-experiences/{{professionalExperienceId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["professional-experiences", "{{professionalExperienceId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Projects",
+      "item": [
+        {
+          "name": "Listar Todos os Projetos",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "if (res.length >= 1) {",
+                  "  pm.collectionVariables.set('projectId', res[0].id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/projects",
+              "host": ["{{baseUrl}}"],
+              "path": ["projects"]
+            }
+          }
+        },
+        {
+          "name": "Buscar Projeto por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/projects/{{projectId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["projects", "{{projectId}}"]
+            }
+          }
+        },
+        {
+          "name": "Buscar Projetos por Perfil",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/projects/profile/{{profileId1}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["projects", "profile", "{{profileId1}}"]
+            }
+          }
+        },
+        {
+          "name": "Criar Projeto",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"E-Commerce Platform\",\n  \"descricao\": \"Plataforma de e-commerce completa com carrinho, pagamento e painel administrativo.\",\n  \"tecnologias\": \"Next.js, Stripe, PostgreSQL, Prisma\",\n  \"link\": \"https://github.com/samuelsousa/ecommerce\",\n  \"profile_id\": \"{{profileId1}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/projects",
+              "host": ["{{baseUrl}}"],
+              "path": ["projects"]
+            }
+          }
+        },
+        {
+          "name": "Atualizar Projeto",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"E-Commerce Platform v2\",\n  \"tecnologias\": \"Next.js 14, Stripe, PostgreSQL, Drizzle ORM\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/projects/{{projectId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["projects", "{{projectId}}"]
+            }
+          }
+        },
+        {
+          "name": "Deletar Projeto",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/projects/{{projectId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["projects", "{{projectId}}"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
