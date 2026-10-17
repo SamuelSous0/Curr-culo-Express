@@ -7,7 +7,7 @@
   "variable": [
     {
       "key": "baseUrl",
-      "value": "https://sua-url-na-vercel.vercel.app",
+      "value": "https://curr-culo-express-teal.vercel.app",
       "type": "string"
     },
     {
